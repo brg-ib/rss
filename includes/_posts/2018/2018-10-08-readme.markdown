@@ -1,0 +1,12 @@
+## READ ME
+##### V.11
+
+# Installation
+
+To install :
+
+1. Open Settings
+2. Click "Install"
+3. Search
+
+If you are writting a multiple-file document&mdash;like
