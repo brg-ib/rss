@@ -1,60 +1,137 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
+<html lang="en">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
 
-<head>
-  <title></title>
-  <link rel="stylesheet" href="css/default.css" />
-  <script src="js/jquery-1.2.6.pack.js" type="text/javascript"></script>
-  <script src="js/myScript.js" type="text/javascript"></script>
-</head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="rss parsing">
+    <meta name="author" content="MLAGHUI Brahim, BORGI Ihcen">
 
-<body>
-  <?php require_once "includes/functions.php"; ?>
-  <div id="wrap">
+    <title>RSsPORT</title>
 
-    <ul id="nav">
-      <li><a href="#content_1" class="selected">L'Est Républicain</a></li>
-      <li><a href="#content_2">Le Républicain Lorrain</a></li>
-      <li><a href="#content_3">Vosges Matin</a></li>
-      <li><a href="#content_4">Les dernieres nouvelles d'Alsace</a></li>
-      <li><a href="#content_5">L'Alsace le Pays</a></li>
-    </ul>
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <div id="mainContent">
+    <!-- Custom fonts for this template -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
-      <div id="content_1">
-        <?php read('https://www.estrepublicain.fr/sport-lorrain/rss');  ?>
+    <!-- Custom styles for this template -->
+    <link href="css/clean-blog.min.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">RSsPORT</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Acceuil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">Nos Références</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+          </ul>
+        </div>
       </div>
-      <!--end content 1-->
+    </nav>
 
-      <div id="content_2">
-        <?php read("https://www.republicain-lorrain.fr/sports/sport-lorrain/rss"); ?>
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('img/home-bg.jpg')">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="site-heading">
+              <h1>RSsPORT</h1>
+              <span class="subheading">Toutes les actualités sportives en temps réel</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <!--end content 2-->
+    </header>
 
-      <div id="content_3">
-        <?php read("https://www.vosgesmatin.fr/sport/sport-lorrain/rss"); ?>
+    <!-- Main Content -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+		<?php 
+require_once 'includes/functions.php';
+connexion_db();
+$reqFlux=$bdd->query("select * from flux");
+$F=$reqFlux->fetchALL();
+
+//var_dump($Flux);
+foreach($F as $f)
+{
+$xml=ParseXml($bdd,$f['idFlux']);
+}
+?>
+       
+         </div>
       </div>
-      <!--end content 3-->
-
-      <div id="content_4">
-        <?php // getFeed("https://www.vosgesmatin.fr/sport/sport-lorrain/rss"); ?>
-      </div>
-      <!--end content 3-->
-
-      <div id="content_5">
-        <?php // getFeed("https://www.vosgesmatin.fr/sport/sport-lorrain/rss"); ?>
-      </div>
-      <!--end content 3-->
-
     </div>
-    <!--end main content -->
 
-  </div>
-  <!--end wrap-->
+    <hr>
 
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <ul class="list-inline text-center">
+              <li class="list-inline-item">
+                <a href="#">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+            <p class="copyright text-muted">Copyright &copy; MLAGHUI Brahim & BORGI Ihcen SLAM 2-i 2018/2019 </p>
+          </div>
+        </div>
+      </div>
+    </footer>
 
-</body>
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/clean-blog.min.js"></script>
+
+  </body>
 
 </html>

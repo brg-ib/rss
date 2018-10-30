@@ -1,0 +1,3 @@
+Flux: idFlux, nomFlux, urlFlux, descriptionFlux, lastUpdateFlux, periodeUpdateFlux
+CONTENIR, 1N Flux, 11 Article
+Article : idArticle, titreArticle, urlArticle, descriptionArticle, datePublicationArticle, auteurArticle, imageArticle, guidArticle
