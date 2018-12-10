@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
   <head>
 
@@ -36,12 +36,12 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="index.html">Acceuil</a>
+              <a class="nav-link" href="index.html">Accueil</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="about.html">Nos Références</a>
             </li>
-            
+
             <li class="nav-item">
               <a class="nav-link" href="contact.html">Contact</a>
             </li>
@@ -58,7 +58,7 @@
           <div class="col-lg-8 col-md-10 mx-auto">
             <div class="site-heading">
               <h1>RSsPORT</h1>
-              <span class="subheading">Toutes les actualités sportives en temps réel</span>
+              <span class="subheading">Toute l'actualité sportive en temps réel</span>
             </div>
           </div>
         </div>
@@ -69,7 +69,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-		<?php 
+		<?php
 require_once 'includes/functions.php';
 connexion_db();
 $reqFlux=$bdd->query("select * from flux");
@@ -81,7 +81,7 @@ foreach($F as $f)
 $xml=ParseXml($bdd,$f['idFlux']);
 }
 ?>
-       
+
          </div>
       </div>
     </div>
