@@ -18,7 +18,8 @@ $bdd = new PDO("mysql:dbname=$mysql_database;host=$mysql_hostname;port=3306", $m
 }
 function ParseXml ($bdd,$idFlux)
 {
-	$reqFlux=$bdd->query("select urlFlux,lastUpdateFlux from flux where idFlux=".$idFlux);
+    $bdd->query("truncate table article;");
+    $reqFlux=$bdd->query("select urlFlux,lastUpdateFlux from flux where idFlux=".$idFlux);
 	$Flux=$reqFlux->fetch();
 	$urlxml=$Flux['urlFlux'];
 $xmlDoc = new DOMDocument();
@@ -31,6 +32,7 @@ $opts = array(
 $context = stream_context_create($opts);
 libxml_set_streams_context($context);
 $xmlDoc->load($urlxml);
+
 
 
 
@@ -47,8 +49,8 @@ for ($i=0; $i < $itemCount; $i++){
 	$pubDate=date("Y-m-d h:m:s", strtotime($d) );
 	//$image = $xmlObject->item($i)->getElementsByTagName("media")->item(0); 
 	//$creator=$xmlObject->item($i)->getElementsByTagName('author')->item(0)->childNodes->item(0)->nodeValue;
-	
-	
+	$image = $xmlObject->item($i)->getElementsByTagName('url');
+//print_r($image);
 ?>
  <div class="post-preview">
             <a href="post.html">
@@ -64,7 +66,7 @@ for ($i=0; $i < $itemCount; $i++){
           </div>
           <hr>
 <?php
-    $sql = $bdd->prepare("INSERT INTO article(idFlux,titreArticle, urlArticle, descriptionArticle, datePublicationArticle, guidArticle) VALUES (?, ?, ?, ?, ?, ?)");
+   $sql = $bdd->prepare("INSERT INTO article(idFlux,titreArticle, urlArticle, descriptionArticle, datePublicationArticle, guidArticle) VALUES (?, ?, ?, ?, ?, ?)");
     $sql->execute(array(
 		$idFlux,
         $title,
@@ -73,7 +75,6 @@ for ($i=0; $i < $itemCount; $i++){
 		$pubDate,
         $guid
     ));
-	var_dump($sql);
 }
 }
 ?>
